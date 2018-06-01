@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content=""> 
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>My Bar Games Admin</title>
+		
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<style>
+		
+		
+		
+		th, td
+		{
+		padding:5px;
+		
+		}
+		
+		
+		#controls{ margin-top: 100px;}
+		
+		
+		.heading,#about, #results
+		{
+		margin-top:100px;
+		}
+		
+		.form_layout label,input,textarea,select
+		{
+		display: block;			
+		}
+				
+		.form_layout textarea
+		{
+		height:200px;	
+		width: 500px;			
+		}
+		
+		.form_layout input[type=submit]
+		{
+		margin-top: 5px;
+		}		
+		
+		.error { color:red;}
+		
+		[id^="doedit_"] { float:right;}
+		
+		
+		</style>
+  </head>
+
+  <body id="main_content">
+     <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">My Bar Games</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Games
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#" id="GetGames">View Games</a></li>
+          <li><a href="#" id="AddGame">Add a Game</a></li>
+          <li><a href="#" id="EditGame" >Edit a Game</a></li>
+        </ul>
+      </li>
+	  <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Businesses
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#" id="GetBusinesses">View Businesses</a></li>
+          <li><a href="#" id="AddBusiness">Add a Business</a></li>
+          <li><a href="#" id="EditBusiness" >Edit a Business</a></li>
+        </ul>
+      </li>
+	  
+	  
+	  
+	  
+	  
+      <li><a href="#">Page 3</a></li>
+    </ul>
+  </div>
+</nav>
+		
+      <div class="container container-table" >
+      <div class="starter-template">			 		
+		
+	    <div id="message"></div>
+		
+		<div id="controls" ></div>
+				 
+		<div id="results">
+		
+			
+		
+		 
+	    </div> 
+<!--	
+		<div id="map_canvas" style="width:100%; height:100%">  
+		<img border="0" alt="Map of bar" src="http://maps.googleapis.com/maps/api/staticmap?center=<?php echo $arrBusiness[0][4] . " " .$arrBusiness[0][5] .",". $arrBusiness[0][6];  ?>&amp;zoom=17&amp;size=312x312&amp;markers=size:mid%7Ccolor:0xFFFF00%7Clabel:%7C<?php echo $arrBusiness[0][4] . " " .$arrBusiness[0][5]. "," . $arrBusiness[0][6];  ?>&amp;maptype=roadmap&amp;sensor=false">
+		</div>
+		-->		
+   </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>		
+    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>		
+    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.js"></script>		
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+		<script src="../../dist/js/bootstrap.min.js"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+		<script src="js/pacccodeservice.js"></script>
+		<script>		
+
+		$(document).ready(function() 
+		{ 
+		
+		$( "#main_content" ).on("click", "a[id^='GetGames']", function(event) {  GetGames();  });
+		$( "#main_content" ).on("click", "a[id^='GetBusinesses']", function(event) {  GetAllBusinesses2();  });
+		$( "#main_content" ).on("click", "a[id^='GetUsers']", function(event) {  GetUsers(); });
+		
+		
+		$( "#main_content" ).on("click", "a[id^='AddGame']", function(event) {  GetAddGameForm(); });
+		$( "#main_content" ).on("click", "a[id^='AddBusiness']", function(event) {  GetAddBusinessForm(); GetAllGames(); });
+		$( "#main_content" ).on("click", "a[id^='AddUser']", function(event) {  AddUsers(); });
+		
+		
+		$( "#main_content" ).on("click", "input[id^='postGame']", function(event) {  AddGame( event ); });	
+		
+		
+		/* GAMES */
+		$( "#main_content" ).on("click", "a[id^='EditGame']", function(event) {  GetAllGames(); });		
+		$( "#main_content" ).on("click", "a[id^='GameToEdit_']", function(event) {  EditGameForm( event ) }) 		
+		$( "#main_content" ).on("click", "input[id^='UpdateGame']", function(event) { UpdateGame( event ) }) 	
+		
+		
+		
+		/* BUSINESS */
+		$( "#main_content" ).on("click", "a[id^='bizToEdit_']", function(event) { 	GetBusiness( event ); }) 		
+		$( "#main_content" ).on("click", "input[id^='postbiz']", function(event) { 	AddBusiness(  ); }) 	
+		$( "#main_content" ).on("click", "input[id^='updateBiz']", function(event) { 	UpdateBusiness( event ); }) 	
+		
+	
+		
+		
+		
+		
+		
+		
+		function GetAddGameForm()
+		{
+		$( "#results" ).empty().append( $("<form id='form_newgame' ><label>Enter new game</label><input type='text' name='newgame' value='' ><input id='postgame' type='submit' value='submit' ></form>") );										  
+		}	
+		
+		
+		function GetAddBusinessForm()
+		{
+		var bizform = "<form id='form_addbiz' ><label>Name of Business:</label><input type='text' name='businessname' value='' ><label>Address:</label><input type='text' name='address' value='' ><label>City:</label><input type='text' name='city' value='' ><label>State:</label><input type='text' name='state' value='' ><label>Zip:</label><input type='text' name='zip' value='' ><label>Country:</label><input type='text' name='country' value='' ><label>WebSite:</label><input type='text' name='website' value='' ><input id='postbiz' type='submit' value='Add businesses' ></form>";
+		$( "#results" ).empty().append( bizform );
+		}
+		
+		
+		});						
+		</script>
+	</body>
+</html>
